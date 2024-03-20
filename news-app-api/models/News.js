@@ -18,9 +18,9 @@ const NewsSchema = new Schema({
         type:String,
         required:true,
     },
-    image:{
+    image:[{
         type:String
-    },
+    }],
     author_id:[{
         type:mongoose.Schema.Types.ObjectId,
         referance:'User',
