@@ -14,7 +14,7 @@ class UserService {
 
     static async getById(id) {
         try {
-            const user = await User.findById(new mongoose.Types.ObjectId(id));
+            const user = await User.findById(id);
             return user;
         } catch (error) {
             console.error(error);
@@ -24,7 +24,7 @@ class UserService {
 
     static async getByRole(roleId) {
         try {
-            const users = await User.find({ role_id: new mongoose.Types.ObjectId(roleId) });
+            const users = await User.find({ role_id:roleId});
             return users;
         } catch (error) {
             console.error(error);
@@ -44,7 +44,7 @@ class UserService {
 
     static async updateUser(id, user) {
         try {
-            const updatedUser = await User.findOneAndUpdate({ _id: new mongoose.Types.ObjectId(id) }, user, { new: true });
+            const updatedUser = await User.findOneAndUpdate(id, user, { new: true });
             return updatedUser;
         } catch (error) {
             console.error(error);
@@ -54,7 +54,7 @@ class UserService {
 
     static async delete(id) {
         try {
-            const deletedUser = await User.findOneAndDelete({ _id: new mongoose.Types.ObjectId(id) });
+            const deletedUser = await User.findOneAndDelete(_id);
             return deletedUser;
         } catch (error) {
             console.error(error);

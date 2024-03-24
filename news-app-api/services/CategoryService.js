@@ -14,7 +14,7 @@ class CategoryService {
 
     static async getById(_id) {
         try {
-            const category = await Category.findById(new mongoose.Types.ObjectId(_id));
+            const category = await Category.findById(_id);
             return category;
         } catch (error) {
             console.error(error);
@@ -34,7 +34,7 @@ class CategoryService {
 
     static async updateUser(_id, category) {
         try {
-            const updatedCategory = await Category.findOneAndUpdate({ _id: new mongoose.Types.ObjectId(_id) }, category, { new: true });
+            const updatedCategory = await Category.findOneAndUpdate(_id, category, { new: true });
             return updatedCategory;
         } catch (error) {
             console.error(error);
@@ -44,7 +44,7 @@ class CategoryService {
 
     static async delete(_id) {
         try {
-            const deletedCategory = await Category.findOneAndDelete({ _id: new mongoose.Types.ObjectId(_id) });
+            const deletedCategory = await Category.findOneAndDelete(_id);
             return deletedCategory;
         } catch (error) {
             console.error(error);
