@@ -32,7 +32,7 @@ class CategoryService {
         }
     }
 
-    static async updateUser(_id, category) {
+    static async updateCategory(_id, category) {
         try {
             const updatedCategory = await Category.findOneAndUpdate(_id, category, { new: true });
             return updatedCategory;

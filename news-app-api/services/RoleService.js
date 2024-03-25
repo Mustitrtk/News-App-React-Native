@@ -32,10 +32,10 @@ class RoleService {
         }
     }
 
-    static async updateUser(_id, role) {
+    static async updateRole(_id, role) {
         try {
-            const updatedUser = await Role.findOneAndUpdate(_id, role, { new: true });
-            return updatedUser;
+            const updatedRole = await Role.findOneAndUpdate(_id, role, { new: true });
+            return updatedRole;
         } catch (error) {
             console.error(error);
             throw error; // Hata yukarıya fırlatılıyor
