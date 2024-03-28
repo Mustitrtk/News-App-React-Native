@@ -32,7 +32,7 @@ class UserService {
         }
     }
 
-    static async addUser(user) {
+    static async add(user) {
         try {
             const newUser = await User.create(user);
             return newUser;
@@ -42,7 +42,7 @@ class UserService {
         }
     }
 
-    static async updateUser(id, user) {
+    static async update(id, user) {
         try {
             const updatedUser = await User.findOneAndUpdate(id, user, { new: true });
             return updatedUser;

@@ -22,7 +22,7 @@ class CategoryService {
         }
     }
 
-    static async addRole(category) {
+    static async add(category) {
         try {
             const newCategory = await Category.create(category);
             return newCategory;
@@ -32,7 +32,7 @@ class CategoryService {
         }
     }
 
-    static async updateCategory(_id, category) {
+    static async update(_id, category) {
         try {
             const updatedCategory = await Category.findOneAndUpdate(_id, category, { new: true });
             return updatedCategory;

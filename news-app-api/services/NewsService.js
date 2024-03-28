@@ -1,11 +1,10 @@
 const News = require('../models/News');
 const Comment = require('../models/Comment');
-const mongoose = require('mongoose');
 
 class NewsService {
     static async get() {
         try {
-            const allNews = await News.find();
+            const allNews = await News.find().sort({datefield: -1});
             return allNews;
         } catch (error) {
             console.error(error);
@@ -33,10 +32,9 @@ class NewsService {
         }
     }
 
-    static async getByCategory(_category_id) {
+    static async getByCategory(category_id) {
         try {
-            const categoryId = mongoose.Types.ObjectId(_category_id); // _category_id'yi ObjectId'ye dönüştür
-            const news = await News.find({ category_id: categoryId });
+            const news = await News.find({ category_id: category_id });
             return news;
         } catch (error) {
             console.error(error);
@@ -46,7 +44,7 @@ class NewsService {
 
     static async getComments(_id) {
         try {
-            const comments = await Comment.find({news_id:mongoose.Types.ObjectId(_id)});
+            const comments = await Comment.find({news_id:_id});
             return comments;
         } catch (error) {
             console.error(error);
@@ -54,7 +52,17 @@ class NewsService {
         }
     }
 
-    static async updateNews(_id, news) {
+    static async add(news) {
+        try {
+            const addNews = await News.create(news);
+            return addNews;
+        } catch (error) {
+            console.error(error);
+            throw error; // Hata yukarıya fırlatılıyor
+        }
+    }
+
+    static async update(_id, news) {
         try {
             const updateNews = await News.findOneAndUpdate(_id, news, { new: true });
             return updateNews;

@@ -1,4 +1,3 @@
-const User = require('../model/User')
 const mongoose = require('mongoose')
 const bodyparser=require('body-parser');
 const argon2 = require('argon2');
@@ -45,26 +44,26 @@ const register = async (req,res) =>{
 exports.get = async(req,res) => {
     try{
         const result = await UserService.get()
-        return res.status(200).json({result:result})
+        res.status(200).json({result:result})
     }catch(error){
-        return res.status(500).json({error:error})
+        res.status(500).json({result:error})
     }
 }
 
 exports.getById = async(req,res) => {
     try{
         const result = await UserService.getById(req.params._id)
-        return res.status(200).json({result:result})
+        res.status(200).json({result:result})
     }catch(error){
-        return res.status(500).json({error:error})
+        res.status(500).json({result:error})
     }
 }
 
-exports.deleteUser = async(req,res) => {
+exports.delete = async(req,res) => {
     try{
         const result = await UserService.delete(req.params._id)
-        return res.status(200).json({result:result})
+        res.status(200).json({result:result})
     }catch(error){
-        return res.status(500).json({error:error})
+        res.status(500).json({result:error})
     }
 }

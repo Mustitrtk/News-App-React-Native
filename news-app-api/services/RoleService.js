@@ -22,7 +22,7 @@ class RoleService {
         }
     }
 
-    static async addRole(role) {
+    static async add(role) {
         try {
             const newRole = await Role.create(role);
             return newRole;
@@ -32,7 +32,7 @@ class RoleService {
         }
     }
 
-    static async updateRole(_id, role) {
+    static async update(_id, role) {
         try {
             const updatedRole = await Role.findOneAndUpdate(_id, role, { new: true });
             return updatedRole;

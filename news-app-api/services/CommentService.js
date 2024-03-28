@@ -14,7 +14,7 @@ class CommentService {
 
     static async getByNewsId(_id) {
         try {
-            const comments = await Comment.find({news_id :mongoose.Types.ObjectId(_id)});
+            const comments = await Comment.find({news_id :_id});
             return comments;
         } catch (error) {
             console.error(error);
@@ -22,7 +22,17 @@ class CommentService {
         }
     }
 
-    static async updateComment(_id, comment) {
+    static async add(comment) {
+        try {
+            const addComment = await Comment.create(comment);
+            return addComment;
+        } catch (error) {
+            console.error(error);
+            throw error; // Hata yukarıya fırlatılıyor
+        }
+    }
+
+    static async update(_id, comment) {
         try {
             const updateComment = await Comment.findOneAndUpdate(_id, comment, { new: true });
             return updateComment;
