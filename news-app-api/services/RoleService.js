@@ -34,7 +34,7 @@ class RoleService {
 
     static async update(_id, role) {
         try {
-            const updatedRole = await Role.findOneAndUpdate(_id, role, { new: true });
+            const updatedRole = await Role.findOneAndUpdate(new mongoose.Types.ObjectId(_id), role, { new: true });
             return updatedRole;
         } catch (error) {
             console.error(error);
@@ -44,7 +44,7 @@ class RoleService {
 
     static async delete(_id) {
         try {
-            const deletedRole = await Role.findOneAndDelete(_id);
+            const deletedRole = await Role.findOneAndDelete(new mongoose.Types.ObjectId(_id));
             return deletedRole;
         } catch (error) {
             console.error(error);
