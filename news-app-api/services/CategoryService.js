@@ -34,7 +34,7 @@ class CategoryService {
 
     static async update(_id, category) {
         try {
-            const updatedCategory = await Category.findOneAndUpdate(_id, category, { new: true });
+            const updatedCategory = await Category.findOneAndUpdate(new mongoose.Types.ObjectId(_id), category, { new: true });
             return updatedCategory;
         } catch (error) {
             console.error(error);
@@ -44,7 +44,7 @@ class CategoryService {
 
     static async delete(_id) {
         try {
-            const deletedCategory = await Category.findOneAndDelete(_id);
+            const deletedCategory = await Category.findOneAndDelete(new mongoose.Types.ObjectId(_id));
             return deletedCategory;
         } catch (error) {
             console.error(error);
