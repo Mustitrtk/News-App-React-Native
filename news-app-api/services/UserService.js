@@ -1,6 +1,7 @@
 const Role = require('../models/Role');
 const User = require('../models/User');
 const argon = require('argon2');
+const mongoose = require('mongoose')
 
 class UserService {
 
@@ -77,7 +78,7 @@ class UserService {
 
     static async update(_id, user) {
         try {
-            const updatedUser = await User.findOneAndUpdate(_id, user, { new: true });
+            const updatedUser = await User.findOneAndUpdate(new mongoose.Types.ObjectId(_id), user, { new: true });
             return updatedUser;
         } catch (error) {
             console.error(error);
@@ -87,7 +88,7 @@ class UserService {
 
     static async delete(_id) {
         try {
-            const deletedUser = await User.findOneAndDelete(_id);
+            const deletedUser = await User.findOneAndDelete(new mongoose.Types.ObjectId(_id));
             return deletedUser;
         } catch (error) {
             console.error(error);

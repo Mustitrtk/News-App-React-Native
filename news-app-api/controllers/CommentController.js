@@ -3,7 +3,7 @@ const CommentService = require('../services/CommentService')
 exports.get = async(req,res) =>{
     try{
         const result = await CommentService.get();
-        result;
+        res.status(200).json({result:result});
     }catch(error){
         res.status(500).json({result:error})
     }

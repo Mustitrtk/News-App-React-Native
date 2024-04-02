@@ -3,6 +3,7 @@ require('dotenv').config()
 const app = express()
 const parser = require('body-parser')
 const UserRouter = require('./routes/UserRouter')
+const RoleRouter = require('./routes/RoleRouter')
 const cors = require('cors')
 
 //DB CONNECTİON
@@ -20,6 +21,7 @@ app.use(parser.json());
 app.use(cors())
 
 app.use('/user',UserRouter)
+app.use('/role',RoleRouter)
 
 app.listen(process.env.PORT, ()=>{
     console.log(`Server is listening on ${process.env.PORT}`)

@@ -14,7 +14,7 @@ exports.login = async (req, res) => {
         const token = jwt.sign({user_id:user_id,user_role:user_role}, process.env.JWT_SECRET,  { expiresIn: "15m" }); //Token oluşturma.
         
         res.cookie('token',token, {httpOnly:true}); //tokeni res ile gönderirrr
-        return res.status(200).json({result:"giris basarili"})
+        return res.status(200).json({result:"Basarili"})
     } catch (error) {
         return res.status(500).json({ result: error });
     }
@@ -26,7 +26,7 @@ exports.register=async(req,res)=>{
         if(user.error){
             return res.status(400).json({ result: user.error });
         }
-        return res.status(200).json(user);
+        return res.status(200).json({result:"Basarili"});
     }catch(error){
         return res.status(500).json({result:error.message});
     }
@@ -68,7 +68,7 @@ exports.update = async(req,res) => {
         if(result.error){
             return res.status(400).json({ result: user.error });
         }
-        res.status(200).json({result:result})
+        res.status(200).json({result:"Basarili"})
     }catch(error){
         res.status(500).json({result:error})
     }
@@ -77,7 +77,7 @@ exports.update = async(req,res) => {
 exports.delete = async(req,res) => {
     try{
         const result = await UserService.delete(req.params._id)
-        res.status(200).json({result:result})
+        res.status(200).json({result:"Basarili"})
     }catch(error){
         res.status(500).json({result:error})
     }
