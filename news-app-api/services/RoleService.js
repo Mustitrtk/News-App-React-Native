@@ -8,7 +8,7 @@ class RoleService {
             return allRoles;
         } catch (error) {
             console.error(error);
-            throw error; // Hata yukarıya fırlatılıyor
+            return {error:error}; // Hata yukarıya fırlatılıyor
         }
     }
 
@@ -18,7 +18,7 @@ class RoleService {
             return role;
         } catch (error) {
             console.error(error);
-            throw error; // Hata yukarıya fırlatılıyor
+            return {error:error}; // Hata yukarıya fırlatılıyor
         }
     }
 
@@ -28,7 +28,7 @@ class RoleService {
             return newRole;
         } catch (error) {
             console.error(error);
-            throw error; // Hata yukarıya fırlatılıyor
+            return {error:error}; // Hata yukarıya fırlatılıyor
         }
     }
 
@@ -38,7 +38,7 @@ class RoleService {
             return updatedRole;
         } catch (error) {
             console.error(error);
-            throw error; // Hata yukarıya fırlatılıyor
+            return {error:error}; // Hata yukarıya fırlatılıyor
         }
     }
 
@@ -48,7 +48,7 @@ class RoleService {
             return deletedRole;
         } catch (error) {
             console.error(error);
-            throw error; // Hata yukarıya fırlatılıyor
+            return {error:error}; // Hata yukarıya fırlatılıyor
         }
     }
 }

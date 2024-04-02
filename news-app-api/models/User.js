@@ -47,29 +47,4 @@ const UserSchema = new Schema({
     }
 },{timestamps:true});
 
-// Şifre kaydedilmeden önce hashleniyor
-UserSchema.pre('save', async function(next) {
-  if (!this.isModified('password')) {
-    return next();
-  }
-  try {
-    // Argon2 kullanarak şifre hashleniyor
-    const hash = await argon2.hash(this.password);
-    this.password = hash;
-    next();
-  } catch (error) {
-    next(error);
-  }
-});
-
-// Şifre doğrulama metodu
-UserSchema.methods.comparePassword = async function(candidatePassword) {
-  try {
-    // Argon2 kullanarak hashli şifreyi karşılaştırma
-    return await argon2.verify(this.password, candidatePassword);
-  } catch (error) {
-    return false;
-  }
-};
-
 module.exports = mongoose.model('User',UserSchema);

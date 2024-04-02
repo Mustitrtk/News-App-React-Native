@@ -8,7 +8,7 @@ class NewsService {
             return allNews;
         } catch (error) {
             console.error(error);
-            throw error; // Hata yukarıya fırlatılıyor
+            return {error:error}; // Hata yukarıya fırlatılıyor
         }
     }
 
@@ -18,7 +18,7 @@ class NewsService {
             return news;
         } catch (error) {
             console.error(error);
-            throw error; // Hata yukarıya fırlatılıyor
+            return {error:error}; // Hata yukarıya fırlatılıyor
         }
     }
 
@@ -28,7 +28,7 @@ class NewsService {
             return news;
         } catch (error) {
             console.error(error);
-            throw error; // Hata yukarıya fırlatılıyor
+            return {error:error}; // Hata yukarıya fırlatılıyor
         }
     }
 
@@ -38,7 +38,7 @@ class NewsService {
             return news;
         } catch (error) {
             console.error(error);
-            throw error; // Hata yukarıya fırlatılıyor
+            return {error:error}; // Hata yukarıya fırlatılıyor
         }
     }
 
@@ -48,7 +48,7 @@ class NewsService {
             return comments;
         } catch (error) {
             console.error(error);
-            throw error; // Hata yukarıya fırlatılıyor
+            return {error:error}; // Hata yukarıya fırlatılıyor
         }
     }
 
@@ -58,7 +58,7 @@ class NewsService {
             return addNews;
         } catch (error) {
             console.error(error);
-            throw error; // Hata yukarıya fırlatılıyor
+            return {error:error}; // Hata yukarıya fırlatılıyor
         }
     }
 
@@ -68,7 +68,7 @@ class NewsService {
             return updateNews;
         } catch (error) {
             console.error(error);
-            throw error; // Hata yukarıya fırlatılıyor
+            return {error:error}; // Hata yukarıya fırlatılıyor
         }
     }
 
@@ -78,7 +78,7 @@ class NewsService {
             return deleteNews;
         } catch (error) {
             console.error(error);
-            throw error; // Hata yukarıya fırlatılıyor
+            return {error:error}; // Hata yukarıya fırlatılıyor
         }
     }
 }

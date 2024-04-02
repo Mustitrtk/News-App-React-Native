@@ -8,7 +8,7 @@ class CommentService {
             return allComment;
         } catch (error) {
             console.error(error);
-            throw error; // Hata yukarıya fırlatılıyor
+            return {error:error}; // Hata yukarıya fırlatılıyor
         }
     }
 
@@ -18,7 +18,7 @@ class CommentService {
             return comments;
         } catch (error) {
             console.error(error);
-            throw error; // Hata yukarıya fırlatılıyor
+            return {error:error}; // Hata yukarıya fırlatılıyor
         }
     }
 
@@ -28,7 +28,7 @@ class CommentService {
             return addComment;
         } catch (error) {
             console.error(error);
-            throw error; // Hata yukarıya fırlatılıyor
+            return {error:error}; // Hata yukarıya fırlatılıyor
         }
     }
 
@@ -38,7 +38,7 @@ class CommentService {
             return updateComment;
         } catch (error) {
             console.error(error);
-            throw error; // Hata yukarıya fırlatılıyor
+            return {error:error}; // Hata yukarıya fırlatılıyor
         }
     }
 
@@ -48,7 +48,7 @@ class CommentService {
             return deleteComment;
         } catch (error) {
             console.error(error);
-            throw error; // Hata yukarıya fırlatılıyor
+            return {error:error}; // Hata yukarıya fırlatılıyor
         }
     }
 }

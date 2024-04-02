@@ -8,7 +8,7 @@ class CategoryService {
             return allCategories;
         } catch (error) {
             console.error(error);
-            throw error; // Hata yukarıya fırlatılıyor
+            return {error:error}; // Hata yukarıya fırlatılıyor
         }
     }
 
@@ -18,7 +18,7 @@ class CategoryService {
             return category;
         } catch (error) {
             console.error(error);
-            throw error; // Hata yukarıya fırlatılıyor
+            return {error:error}; // Hata yukarıya fırlatılıyor
         }
     }
 
@@ -28,7 +28,7 @@ class CategoryService {
             return newCategory;
         } catch (error) {
             console.error(error);
-            throw error; // Hata yukarıya fırlatılıyor
+            return {error:error}; // Hata yukarıya fırlatılıyor
         }
     }
 
@@ -38,7 +38,7 @@ class CategoryService {
             return updatedCategory;
         } catch (error) {
             console.error(error);
-            throw error; // Hata yukarıya fırlatılıyor
+            return {error:error}; // Hata yukarıya fırlatılıyor
         }
     }
 
@@ -48,7 +48,7 @@ class CategoryService {
             return deletedCategory;
         } catch (error) {
             console.error(error);
-            throw error; // Hata yukarıya fırlatılıyor
+            return {error:error}; // Hata yukarıya fırlatılıyor
         }
     }
 }
