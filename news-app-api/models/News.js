@@ -34,7 +34,6 @@ const NewsSchema = new Schema({
     comment_id:[{
         type:mongoose.Schema.Types.ObjectId,
         referance:'Comment',
-        required:true
     }]
 },{timestamps:true});
 

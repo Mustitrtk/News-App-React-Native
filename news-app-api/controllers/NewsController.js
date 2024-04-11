@@ -3,7 +3,7 @@ const NewsService = require('../services/NewsService')
 exports.get = async(req,res) =>{
     try{
         const result = await NewsService.get();
-        result;
+        res.status(200).json({result:result});
     }catch(error){
         res.status(500).json({result:error})
     }

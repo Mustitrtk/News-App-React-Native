@@ -5,6 +5,7 @@ const parser = require('body-parser')
 const UserRouter = require('./routes/UserRouter')
 const RoleRouter = require('./routes/RoleRouter')
 const CategoryRouter = require('./routes/CategoryRouter')
+const NewsRouter = require('./routes/NewsRouter')
 const cors = require('cors')
 
 //DB CONNECTİON
@@ -24,6 +25,7 @@ app.use(cors())
 app.use('/user',UserRouter)
 app.use('/role',RoleRouter)
 app.use('/category',CategoryRouter)
+app.use('/news',NewsRouter)
 
 app.listen(process.env.PORT, ()=>{
     console.log(`Server is listening on ${process.env.PORT}`)

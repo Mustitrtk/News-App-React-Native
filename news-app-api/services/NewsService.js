@@ -8,13 +8,14 @@ class NewsService {
             return allNews;
         } catch (error) {
             console.error(error);
-            return {error:error}; // Hata yukarıya fırlatılıyor
+            return { error: error }; // Hata yukarıya fırlatılıyor
         }
-    }
+    }    
 
     static async getById(_id) {
         try {
-            const news = await News.findById(_id);
+            const news = await News.findById(_id).populate({ path: 'author_id', select: ['name', 'surname'] })
+            .populate('category_id', 'name');
             return news;
         } catch (error) {
             console.error(error);
