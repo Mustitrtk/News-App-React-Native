@@ -4,7 +4,7 @@ const Comment = require('../models/Comment');
 class NewsService {
     static async get() {
         try {
-            const allNews = await News.find().sort({datefield: -1});
+            const allNews = await News.find().sort({createdAt: -1});
             return allNews;
         } catch (error) {
             console.error(error);
