@@ -1,20 +1,34 @@
-import React from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import React, { useEffect, useState, useRef } from 'react';
+import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Modal, Animated, Dimensions, TouchableWithoutFeedback, SafeAreaView } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const RegisterScreen = ({ navigation }) => {
-  const [email, setEmail] = React.useState('');
-  const [name, setName] = React.useState('');
-  const [surname, setSurname] = React.useState('');
-  const [telephoneNo, setTelephoneNo] = React.useState('');
-  const [username, setUsername] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [surname, setSurname] = useState('');
+  const [telephoneNo, setTelephoneNo] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleRegister = () => {
-    // Api axios işlemi
+    // API axios işlemi
   };
+
+  const handlePress = () => {
+    navigation.navigate('Ana Sayfa');
+  };
+
+  const handleLoginPress = () =>{
+    navigation.navigate('Login');
+  }
 
   return (
     <View style={styles.container}>
+      <SafeAreaView style={styles.header}>
+        <TouchableOpacity style={styles.headerButton} onPress={handlePress}>
+          <Text style={styles.headerTitle}>NEWS APP</Text>
+        </TouchableOpacity>
+      </SafeAreaView>
       <Text style={styles.label}>Username:</Text>
       <TextInput
         style={styles.input}
@@ -66,7 +80,7 @@ const RegisterScreen = ({ navigation }) => {
         <Button title="Register" onPress={handleRegister} />
         <Button
           title="Login"
-          onPress={() => navigation.navigate('Login')}
+          onPress={handleLoginPress}
           color="#007AFF"
         />
       </View>
@@ -80,6 +94,26 @@ const styles = StyleSheet.create({
     padding: 20,
     justifyContent: 'center',
     backgroundColor: '#fff',
+  },
+  header: {
+    backgroundColor: '#6200ea',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 20,
+    paddingTop: 20, // This ensures the content inside SafeAreaView is not cut off
+  },
+  headerTitle: {
+    color: '#fff',
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+  headerButton: {
+    padding: 10,
+  },
+  headerButtonText: {
+    color: '#fff',
+    fontSize: 30,
   },
   label: {
     marginBottom: 5,
