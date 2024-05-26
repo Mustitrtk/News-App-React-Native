@@ -17,8 +17,8 @@ const CategoryNewsScreen = ({ route }) => {
 
   const fetchNewsByCategory = async () => {
     try {
-      const response = await fetch(`http://172.20.10.2:8080/news/getByCategory/${category_id}`, { method: 'GET' });
-      const response_category = await fetch(`http://172.20.10.2:8080/category/get/${category_id}`, { method: 'GET' });
+      const response = await fetch(`http://192.168.1.87:8080/news/getByCategory/${category_id}`, { method: 'GET' });
+      const response_category = await fetch(`http://192.168.1.87:8080/category/get/${category_id}`, { method: 'GET' });
       const data = await response.json();
       const data_category = await response_category.json();
       setNews(data.result);

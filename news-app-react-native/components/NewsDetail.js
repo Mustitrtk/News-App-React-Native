@@ -17,7 +17,7 @@ const NewsDetail = ({ route }) => {
 
   const fetchNewsDetail = async () => {
     try {
-      const response = await fetch(`http://172.20.10.2:8080/news/get/${id}`, { method: 'GET' });
+      const response = await fetch(`http://192.168.1.87:8080/news/get/${id}`, { method: 'GET' });
       const data = await response.json();
       setNewsDetail(data.result);
     } catch (error) {
