@@ -6,6 +6,7 @@ import RegisterScreen from './components/RegisterScreen';
 import HomeScreen from './components/HomeScreen';
 import NewsDetail from './components/NewsDetail';
 import CategoryNewsScreen from './components/CategoryNewsScreen';
+import TypeNewsScreen from './components/TypeNewsScreen';
 
 const Stack = createStackNavigator();
 
@@ -18,6 +19,7 @@ const App = () => {
         <Stack.Screen name="Register" component={RegisterScreen} options={{ headerShown: false}} />
         <Stack.Screen name="NewsDetail" component={NewsDetail} options={{ headerShown: false}} />
         <Stack.Screen name="CategoryNews" component={CategoryNewsScreen} options={{ headerShown: false}} />
+        <Stack.Screen name="TypeNews" component={TypeNewsScreen} options={{ headerShown: false}} />
       </Stack.Navigator>
     </NavigationContainer>
   );
