@@ -1,32 +1,35 @@
-// HomeScreen.js
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import { useNavigation } from '@react-navigation/native';
 
-const HomeScreen = () => {
+const CategoryNewsScreen = ({ route }) => {
+  const { category_id } = route.params;
   const [news, setNews] = useState([]);
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
   const navigation = useNavigation();
 
-
   useEffect(() => {
-    fetchNews();
-  }, []);
+    fetchNewsByCategory();
+  }, [category_id]);
 
-  const fetchNews = async () => {
+  const fetchNewsByCategory = async () => {
     try {
-      const response = await fetch('http://172.20.10.2:8080/news/get', { method: 'GET' });
+      const response = await fetch(`http://172.20.10.2:8080/news/getByCategory/${category_id}`, { method: 'GET' });
       const data = await response.json();
       setNews(data.result);
     } catch (error) {
-      console.error('Error fetching news:', error);
+      console.error('Error fetching news by category:', error);
     }
   };
 
   const handleSidebarToggle = () => {
     setIsSidebarVisible(!isSidebarVisible);
+  };
+
+  const handleSidebarClose = () => {
+    setIsSidebarVisible(false);
   };
 
   const renderNewsItem = ({ item }) => {
@@ -61,7 +64,7 @@ const HomeScreen = () => {
         <Text style={styles.noNewsText}>No news to display</Text>
       )}
 
-      <Sidebar isVisible={isSidebarVisible} onClose={handleSidebarToggle} />
+      <Sidebar isVisible={isSidebarVisible} onClose={handleSidebarClose} />
     </View>
   );
 };
@@ -122,4 +125,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+export default CategoryNewsScreen;

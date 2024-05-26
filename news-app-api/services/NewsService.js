@@ -35,7 +35,7 @@ class NewsService {
 
     static async getByCategory(category_id) {
         try {
-            const news = await News.find({ category_id: category_id });
+            const news = await News.find({ category_id: category_id }).sort({createdAt: -1});
             return news;
         } catch (error) {
             console.error(error);
