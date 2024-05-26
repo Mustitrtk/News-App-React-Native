@@ -52,6 +52,7 @@ const TypeNewsScreen = ({ route }) => {
   return (
     <View style={styles.container}>
       <Header onToggleSidebar={handleSidebarToggle} />
+      <Text style={styles.headerText}>Köşe Yazısı</Text>
       
       {news.length > 0 ? (
         <FlatList
@@ -122,6 +123,12 @@ const styles = StyleSheet.create({
     marginTop: 20,
     color: '#888',
     fontSize: 18,
+  },
+  headerText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginVertical: 20,
   },
 });
 

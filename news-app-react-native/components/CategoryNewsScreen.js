@@ -9,6 +9,7 @@ const CategoryNewsScreen = ({ route }) => {
   const [news, setNews] = useState([]);
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
   const navigation = useNavigation();
+  const [category_Name, set_category_name] = useState("");
 
   useEffect(() => {
     fetchNewsByCategory();
@@ -17,8 +18,11 @@ const CategoryNewsScreen = ({ route }) => {
   const fetchNewsByCategory = async () => {
     try {
       const response = await fetch(`http://172.20.10.2:8080/news/getByCategory/${category_id}`, { method: 'GET' });
+      const response_category = await fetch(`http://172.20.10.2:8080/category/get/${category_id}`, { method: 'GET' });
       const data = await response.json();
+      const data_category = await response_category.json();
       setNews(data.result);
+      set_category_name(data_category.result);
     } catch (error) {
       console.error('Error fetching news by category:', error);
     }
@@ -52,6 +56,7 @@ const CategoryNewsScreen = ({ route }) => {
   return (
     <View style={styles.container}>
       <Header onToggleSidebar={handleSidebarToggle} />
+      <Text style={styles.headerText}>{category_Name.name}</Text>
       
       {news.length > 0 ? (
         <FlatList
@@ -122,6 +127,12 @@ const styles = StyleSheet.create({
     marginTop: 20,
     color: '#888',
     fontSize: 18,
+  },
+  headerText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginVertical: 20,
   },
 });
 

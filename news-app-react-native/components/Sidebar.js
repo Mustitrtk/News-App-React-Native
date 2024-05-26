@@ -37,7 +37,7 @@ const Sidebar = ({ isVisible, onClose }) => {
               <TouchableOpacity onPress={() => handlePress('CategoryNews', { category_id: "6617d8ad62ad98e13aec9663" })} style={styles.sidebarItem}>
                 <Text style={styles.sidebarItemText}>Magazin</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => handlePress('TypeNews', { type: "1" })} style={styles.sidebarItem}>
+              <TouchableOpacity onPress={() => handlePress('TypeNews', { type: "0" })} style={styles.sidebarItem}>
                 <Text style={styles.sidebarItemText}>Köşe Yazısı</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => handlePress('Login')} style={styles.sidebarItem}>
