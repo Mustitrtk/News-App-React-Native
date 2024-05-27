@@ -32,14 +32,11 @@ exports.isLogin = async (req, res) => {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         const user_role = decoded.user_role;
 
-        console.log(user_role);
         const role = await Role.findById({_id:user_role});
         
         if (!role) {
             return res.status(404).json({ result: "role not found" });
         }
-
-        console.log(role.name);
 
         switch (role.name) {
             case "kullanici":
