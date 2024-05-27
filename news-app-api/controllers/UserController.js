@@ -53,6 +53,22 @@ exports.isLogin = async (req, res) => {
     }
 };
 
+exports.authUser = async (req, res) => {
+    try {
+        const token = req.cookies.token;
+        
+        if (token == null) {
+            return res.status(200).json({ result: "Hata" });
+        }
+
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        return res.status(200).json({ result: decoded.user_id });
+    } catch (error) {
+        console.error("Error checking login:", error);
+        return res.status(500).json({ result: error.message });
+    }
+};
+
 exports.register=async(req,res)=>{
     try{
         const user = await UserService.Register(req.body);

@@ -11,7 +11,7 @@ const Sidebar = ({ isVisible, onClose }) => {
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {
-        const response = await fetch(`http://10.2.28.145:8080/user/isLogin`, { method: 'GET' });
+        const response = await fetch(`http://10.14.11.145:8080/user/isLogin`, { method: 'GET' });
         const data = await response.json();
         setRole(data.result);
       } catch (error) {
@@ -64,6 +64,9 @@ const Sidebar = ({ isVisible, onClose }) => {
               </TouchableOpacity>
               <TouchableOpacity onPress={() => handlePress('TypeNews', { type: "0" })} style={styles.sidebarItem}>
                 <Text style={styles.sidebarItemText}>Köşe Yazısı</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => handlePress('CreateNews')} style={styles.sidebarItem}>
+                <Text style={styles.sidebarItemText}>Haber Oluştur</Text>
               </TouchableOpacity>
               {role === "anonymous" && (
                 <>

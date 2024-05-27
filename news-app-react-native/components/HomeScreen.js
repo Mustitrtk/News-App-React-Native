@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity, Dimensions, Animated } from 'react-native';
 import Header from './Header';
 import Sidebar from './Sidebar';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 
 const { width } = Dimensions.get('window');
 
@@ -13,14 +13,10 @@ const HomeScreen = () => {
   const scrollX = useRef(new Animated.Value(0)).current;
   const navigation = useNavigation();
 
-  useEffect(() => {
-    fetchNews();
-    fetchCategoryNews();
-  }, []);
-
+  // Veri çekme işlemlerini bir fonksiyona alıyoruz
   const fetchNews = async () => {
     try {
-      const response = await fetch('http://10.2.28.145:8080/news/get', { method: 'GET' });
+      const response = await fetch('http://10.14.11.145:8080/news/get', { method: 'GET' });
       const data = await response.json();
       setNews(data.result);
     } catch (error) {
@@ -30,13 +26,20 @@ const HomeScreen = () => {
 
   const fetchCategoryNews = async () => {
     try {
-      const response = await fetch('http://10.2.28.145:8080/news/getByCategory/6617d8a662ad98e13aec9661', { method: 'GET' });
+      const response = await fetch('http://10.14.11.145:8080/news/getByCategory/6617d8a662ad98e13aec9661', { method: 'GET' });
       const data = await response.json();
       setCategoryNews(data.result);
     } catch (error) {
       console.error('Error fetching category news:', error);
     }
   };
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchNews();
+      fetchCategoryNews();
+    }, [])
+  );
 
   const handleSidebarToggle = () => {
     setIsSidebarVisible(!isSidebarVisible);

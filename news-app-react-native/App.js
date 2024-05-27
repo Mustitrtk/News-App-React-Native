@@ -7,6 +7,7 @@ import HomeScreen from './components/HomeScreen';
 import NewsDetail from './components/NewsDetail';
 import CategoryNewsScreen from './components/CategoryNewsScreen';
 import TypeNewsScreen from './components/TypeNewsScreen';
+import CreateNewsScreen from './components/CreateNewsScreen';
 
 const Stack = createStackNavigator();
 
@@ -16,7 +17,7 @@ const App = () => {
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {
-        const response = await fetch(`http://10.2.28.145:8080/user/isLogin`, { method: 'GET' });
+        const response = await fetch(`http://10.14.11.145:8080/user/isLogin`, { method: 'GET' });
         const data = await response.json();
         setRole(data.result);
       } catch (error) {
@@ -40,6 +41,7 @@ const App = () => {
         <Stack.Screen name="NewsDetail" component={NewsDetail} options={{ headerShown: false }} />
         <Stack.Screen name="CategoryNews" component={CategoryNewsScreen} options={{ headerShown: false }} />
         <Stack.Screen name="TypeNews" component={TypeNewsScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="CreateNews" component={CreateNewsScreen} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

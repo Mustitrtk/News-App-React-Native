@@ -10,8 +10,35 @@ const RegisterScreen = ({ navigation }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleRegister = () => {
-    // API axios işlemi
+  const handleRegister = async() => {
+    try {
+      const response = await fetch('http://10.2.28.145:8080/user/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name : name,
+          surname : surname,
+          telephoneNo : telephoneNo,
+          mail : email,
+          password : password,
+        }),
+      });
+
+      const data = await response.json();
+      
+      // Assuming the response contains a 'result' indicating success or failure
+      if (data.result === 'Basarili') {
+        navigation.navigate('Login');
+      } else {
+        // Handle login failure, show error message or anything else
+        console.log('Login failed');
+      }
+    } catch (error) {
+      // Handle network errors or other exceptions
+      console.error('Error during login:', error);
+    }
   };
 
   const handlePress = () => {

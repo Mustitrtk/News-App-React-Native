@@ -16,7 +16,7 @@ const TypeNewsScreen = ({ route }) => {
 
   const fetchNewsByCategory = async () => {
     try {
-      const response = await fetch(`http://10.2.28.145:8080/news/getByType/${type}`, { method: 'GET' });
+      const response = await fetch(`http://10.14.11.145:8080/news/getByType/${type}`, { method: 'GET' });
       const data = await response.json();
       setNews(data.result);
     } catch (error) {

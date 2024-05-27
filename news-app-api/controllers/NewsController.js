@@ -39,7 +39,7 @@ exports.getByType = async(req,res)=>{
 exports.add = async(req,res)=>{
     try{
         const result = await NewsService.add(req.body);
-        res.status(200).json({result:result})
+        res.status(200).json({result:"Basarili"})
     }catch(error){
         res.result(500).json({result:error})
     }
@@ -52,7 +52,7 @@ exports.update = async(req,res)=>{
             res.status(404).json({result:'Haber bulunamadi'})
         }
         const result = await NewsService.update(req.params._id,req.body);
-        res.status(200).json({result:result})
+        res.status(200).json({result:"Basarili"})
     }catch(error){
         res.result(500).json({result:error})
     }
@@ -65,7 +65,7 @@ exports.delete = async(req,res)=>{
             res.status(404).json({result:'Haber bulunamadi'})
         }
         const result = await NewsService.delete(req.params._id);
-        res.status(200).json({result:result})
+        res.status(200).json({result:"Basarili"})
     }catch(error){
         res.result(500).json({result:error})
     }

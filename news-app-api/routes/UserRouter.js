@@ -5,6 +5,7 @@ const AuthMiddleware = require('../middlewares/AuthMiddleware')
 
 app.post('/login',UserController.login)
 app.get('/isLogin',UserController.isLogin)
+app.get('/auth/user',UserController.authUser)
 app.post('/register',UserController.register)
 app.get('/get',UserController.get)
 app.get('/get/:_id',UserController.getById)

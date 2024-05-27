@@ -55,6 +55,7 @@ class NewsService {
 
     static async add(news) {
         try {
+            console.log(news)
             const addNews = await News.create(news);
             return addNews;
         } catch (error) {
