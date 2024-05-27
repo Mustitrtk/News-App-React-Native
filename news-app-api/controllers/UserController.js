@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const UserService = require('../services/UserService');
+const Role = require('../models/Role');
 
 exports.login = async (req, res) => {
     try {
@@ -17,6 +18,41 @@ exports.login = async (req, res) => {
         return res.status(200).json({result:"Basarili"})
     } catch (error) {
         return res.status(500).json({ result: error });
+    }
+};
+
+exports.isLogin = async (req, res) => {
+    try {
+        const token = req.cookies.token;
+        
+        if (token == null) {
+            return res.status(200).json({ result: "anonymous" });
+        }
+
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const user_role = decoded.user_role;
+
+        console.log(user_role);
+        const role = await Role.findById({_id:user_role});
+        
+        if (!role) {
+            return res.status(404).json({ result: "role not found" });
+        }
+
+        console.log(role.name);
+
+        switch (role.name) {
+            case "kullanici":
+            case "yazar":
+            case "arastirmaci":
+                return res.status(200).json({ result: role.name });
+            default:
+                return res.status(400).json({ result: "unknown role" });
+        }
+
+    } catch (error) {
+        console.error("Error checking login:", error);
+        return res.status(500).json({ result: error.message });
     }
 };
 

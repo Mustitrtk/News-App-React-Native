@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Animated, Dimensions, Modal, TouchableWithoutFeedback } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
@@ -6,12 +6,37 @@ const Sidebar = ({ isVisible, onClose }) => {
   const slideAnim = useRef(new Animated.Value(Dimensions.get('window').width)).current;
   const navigation = useNavigation();
 
+  const [role, setRole] = useState('');
+
   useEffect(() => {
-    Animated.timing(slideAnim, {
-      toValue: isVisible ? 0 : Dimensions.get('window').width,
-      duration: 300,
-      useNativeDriver: true,
-    }).start();
+    const checkLoginStatus = async () => {
+      try {
+        const response = await fetch(`http://10.2.28.145:8080/user/isLogin`, { method: 'GET' });
+        const data = await response.json();
+        setRole(data.result);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    if (isVisible) {
+      Animated.timing(slideAnim, {
+        toValue: 0,
+        duration: 300,
+        useNativeDriver: true,
+      }).start();
+      checkLoginStatus();
+    } else {
+      Animated.timing(slideAnim, {
+        toValue: Dimensions.get('window').width,
+        duration: 300,
+        useNativeDriver: true,
+      }).start();
+    }
+
+    return () => {
+      // Add cleanup logic if needed
+    };
   }, [isVisible]);
 
   const handlePress = (screen, params) => {
@@ -40,12 +65,16 @@ const Sidebar = ({ isVisible, onClose }) => {
               <TouchableOpacity onPress={() => handlePress('TypeNews', { type: "0" })} style={styles.sidebarItem}>
                 <Text style={styles.sidebarItemText}>Köşe Yazısı</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => handlePress('Login')} style={styles.sidebarItem}>
-                <Text style={styles.sidebarItemText}>Giriş</Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => handlePress('Register')} style={styles.sidebarItem}>
-                <Text style={styles.sidebarItemText}>Kayıt</Text>
-              </TouchableOpacity>
+              {role === "anonymous" && (
+                <>
+                  <TouchableOpacity onPress={() => handlePress('Login')} style={styles.sidebarItem}>
+                    <Text style={styles.sidebarItemText}>Giriş</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => handlePress('Register')} style={styles.sidebarItem}>
+                    <Text style={styles.sidebarItemText}>Kayıt</Text>
+                  </TouchableOpacity>
+                </>
+              )}
             </Animated.View>
           </TouchableWithoutFeedback>
         </View>

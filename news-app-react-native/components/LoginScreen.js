@@ -1,17 +1,38 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Modal, Animated, Dimensions, TouchableWithoutFeedback, SafeAreaView } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigation = useNavigation();
 
-  const handleLogin = () => {
-    // API axios işlemi
-  };
+  const handleLogin = async () => {
+    try {
+      const response = await fetch('http://10.2.28.145:8080/user/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          mail : email,
+          password : password,
+        }),
+      });
 
-  const handlePress = () => {
-    navigation.navigate('Ana Sayfa');
+      const data = await response.json();
+      
+      // Assuming the response contains a 'result' indicating success or failure
+      if (data.result === 'Basarili') {
+        navigation.navigate('Ana Sayfa');
+      } else {
+        // Handle login failure, show error message or anything else
+        console.log('Login failed');
+      }
+    } catch (error) {
+      // Handle network errors or other exceptions
+      console.error('Error during login:', error);
+    }
   };
 
   const handleRegisterPress = () => {
@@ -21,7 +42,7 @@ const LoginScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.header}>
-        <TouchableOpacity style={styles.headerButton} onPress={handlePress}>
+        <TouchableOpacity style={styles.headerButton} onPress={() => navigation.navigate('Ana Sayfa')}>
           <Text style={styles.headerTitle}>NEWS APP</Text>
         </TouchableOpacity>
       </SafeAreaView>
@@ -70,10 +91,6 @@ const styles = StyleSheet.create({
   },
   headerButton: {
     padding: 10,
-  },
-  headerButtonText: {
-    color: '#fff',
-    fontSize: 30,
   },
   container: {
     flex: 1,
