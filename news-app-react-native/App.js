@@ -17,7 +17,7 @@ const App = () => {
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {
-        const response = await fetch(`http://10.14.11.145:8080/user/isLogin`, { method: 'GET' });
+        const response = await fetch(`http://172.20.10.2:8080/user/isLogin`, { method: 'GET' });
         const data = await response.json();
         setRole(data.result);
       } catch (error) {
@@ -32,12 +32,8 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Ana Sayfa">
         <Stack.Screen name="Ana Sayfa" component={HomeScreen} options={{ headerShown: false }} />
-        {role === "anonymous" && (
-          <>
-            <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
-            <Stack.Screen name="Register" component={RegisterScreen} options={{ headerShown: false }} />
-          </>
-        )}
+        <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Register" component={RegisterScreen} options={{ headerShown: false }} />
         <Stack.Screen name="NewsDetail" component={NewsDetail} options={{ headerShown: false }} />
         <Stack.Screen name="CategoryNews" component={CategoryNewsScreen} options={{ headerShown: false }} />
         <Stack.Screen name="TypeNews" component={TypeNewsScreen} options={{ headerShown: false }} />

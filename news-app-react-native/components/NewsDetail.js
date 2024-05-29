@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Modal, Animated, Dimensions, TouchableWithoutFeedback, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Modal, Animated, Dimensions, ActivityIndicator, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Header from './Header';
 import Sidebar from './Sidebar';
@@ -17,7 +17,7 @@ const NewsDetail = ({ route }) => {
 
   const fetchNewsDetail = async () => {
     try {
-      const response = await fetch(`http://10.14.11.145:8080/news/get/${id}`, { method: 'GET' });
+      const response = await fetch(`http://172.20.10.2:8080/news/get/${id}`, { method: 'GET' });
       const data = await response.json();
       setNewsDetail(data.result);
     } catch (error) {
@@ -45,7 +45,7 @@ const NewsDetail = ({ route }) => {
   if (!newsDetail) {
     return (
       <View style={styles.loadingContainer}>
-        <Text>Loading...</Text>
+        <ActivityIndicator size="large" color="#0000ff" />
       </View>
     );
   }
@@ -53,10 +53,11 @@ const NewsDetail = ({ route }) => {
   return (
     <View style={styles.container}>
       <Header onToggleSidebar={handleSidebarToggle} />
-      <Text style={styles.title}>{newsDetail.title}</Text>
-      <Text style={styles.subtitle}>{newsDetail.subtitle}</Text>
-      <Text style={styles.content}>{newsDetail.content}</Text>
-
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <Text style={styles.title}>{newsDetail.title}</Text>
+        <Text style={styles.subtitle}>{newsDetail.subtitle}</Text>
+        <Text style={styles.content}>{newsDetail.content}</Text>
+      </ScrollView>
       <Sidebar isVisible={isSidebarVisible} onClose={handleSidebarToggle} />
     </View>
   );
@@ -72,22 +73,26 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  scrollContainer: {
+    padding: 20,
+  },
   title: {
-    fontSize: 24,
+    fontSize: 26,
     fontWeight: 'bold',
     marginBottom: 10,
     textAlign: 'center',
+    color: '#333',
   },
   subtitle: {
     fontSize: 18,
-    marginBottom: 10,
-    color: '#888',
+    marginBottom: 15,
+    color: '#666',
     textAlign: 'center',
   },
   content: {
     fontSize: 16,
     lineHeight: 24,
-    paddingHorizontal: 20,
+    color: '#444',
     textAlign: 'justify',
   },
 });

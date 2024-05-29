@@ -16,7 +16,7 @@ const HomeScreen = () => {
   // Veri çekme işlemlerini bir fonksiyona alıyoruz
   const fetchNews = async () => {
     try {
-      const response = await fetch('http://10.14.11.145:8080/news/get', { method: 'GET' });
+      const response = await fetch('http://172.20.10.2:8080/news/get', { method: 'GET' });
       const data = await response.json();
       setNews(data.result);
     } catch (error) {
@@ -26,7 +26,7 @@ const HomeScreen = () => {
 
   const fetchCategoryNews = async () => {
     try {
-      const response = await fetch('http://10.14.11.145:8080/news/getByCategory/6617d8a662ad98e13aec9661', { method: 'GET' });
+      const response = await fetch('http://172.20.10.2:8080/news/getByCategory/6617d8a662ad98e13aec9661', { method: 'GET' });
       const data = await response.json();
       setCategoryNews(data.result);
     } catch (error) {

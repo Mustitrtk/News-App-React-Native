@@ -81,6 +81,18 @@ exports.register=async(req,res)=>{
     }
 };
 
+exports.logout = async(req,res)=>{
+    try{
+        // Token çerezi temizle
+        res.clearCookie('token');
+        
+        // Başarılı mesaj gönder
+        return res.status(200).json({ result: 'Basarili' });
+    }catch(error){
+        return res.status(500).json({result:error.message})
+    }
+}
+
 exports.get = async(req,res) => {
     try{
         const result = await UserService.get()

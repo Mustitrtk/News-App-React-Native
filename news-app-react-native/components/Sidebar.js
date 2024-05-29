@@ -11,7 +11,7 @@ const Sidebar = ({ isVisible, onClose }) => {
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {
-        const response = await fetch(`http://10.14.11.145:8080/user/isLogin`, { method: 'GET' });
+        const response = await fetch(`http://172.20.10.2:8080/user/isLogin`, { method: 'GET' });
         const data = await response.json();
         setRole(data.result);
       } catch (error) {
@@ -44,6 +44,18 @@ const Sidebar = ({ isVisible, onClose }) => {
     navigation.navigate(screen, params);
   };
 
+  const handleLogout = async()=>{
+    try {
+      const response = await fetch(`http://172.20.10.2:8080/user/logout`, { method: 'GET' });
+      const data = await response.json();
+      if(data.result=="Basarili"){
+        navigation.navigate("Login")
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Modal transparent={true} visible={isVisible} animationType="none">
       <TouchableWithoutFeedback onPress={onClose}>
@@ -65,9 +77,20 @@ const Sidebar = ({ isVisible, onClose }) => {
               <TouchableOpacity onPress={() => handlePress('TypeNews', { type: "0" })} style={styles.sidebarItem}>
                 <Text style={styles.sidebarItemText}>Köşe Yazısı</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => handlePress('CreateNews')} style={styles.sidebarItem}>
-                <Text style={styles.sidebarItemText}>Haber Oluştur</Text>
-              </TouchableOpacity>
+              {role === "yazar" || role ==="arastirmaci" && (
+                <>
+                  <TouchableOpacity onPress={() => handlePress('CreateNews')} style={styles.sidebarItem}>
+                    <Text style={styles.sidebarItemText}>Haber Oluştur</Text>
+                  </TouchableOpacity>
+                </>
+              )}
+              {role !== "anonymous"&& (
+                <>
+                  <TouchableOpacity onPress={() => handleLogout()} style={styles.sidebarItem}>
+                    <Text style={styles.sidebarItemText}>Çıkış</Text>
+                  </TouchableOpacity>
+                </>
+              )}
               {role === "anonymous" && (
                 <>
                   <TouchableOpacity onPress={() => handlePress('Login')} style={styles.sidebarItem}>
