@@ -7,11 +7,22 @@ const Sidebar = ({ isVisible, onClose }) => {
   const navigation = useNavigation();
 
   const [role, setRole] = useState('');
+  const [category, setCategory] = useState([]); // Başlangıç değeri olarak boş bir dizi atanıyor
+
+  const getCategories = async () => {
+    try {
+      const response = await fetch('http://10.14.8.87:8080/category/get', { method: 'GET' });
+      const data = await response.json();
+      setCategory(data.result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {
-        const response = await fetch(`http://172.20.10.2:8080/user/isLogin`, { method: 'GET' });
+        const response = await fetch(`http://10.14.8.87:8080/user/isLogin`, { method: 'GET' });
         const data = await response.json();
         setRole(data.result);
       } catch (error) {
@@ -26,6 +37,7 @@ const Sidebar = ({ isVisible, onClose }) => {
         useNativeDriver: true,
       }).start();
       checkLoginStatus();
+      getCategories(); // Kategorileri getir
     } else {
       Animated.timing(slideAnim, {
         toValue: Dimensions.get('window').width,
@@ -34,9 +46,7 @@ const Sidebar = ({ isVisible, onClose }) => {
       }).start();
     }
 
-    return () => {
-      // Add cleanup logic if needed
-    };
+    return () => {};
   }, [isVisible]);
 
   const handlePress = (screen, params) => {
@@ -44,12 +54,12 @@ const Sidebar = ({ isVisible, onClose }) => {
     navigation.navigate(screen, params);
   };
 
-  const handleLogout = async()=>{
+  const handleLogout = async () => {
     try {
-      const response = await fetch(`http://172.20.10.2:8080/user/logout`, { method: 'GET' });
+      const response = await fetch(`http://10.14.8.87:8080/user/logout`, { method: 'GET' });
       const data = await response.json();
-      if(data.result=="Basarili"){
-        navigation.navigate("Login")
+      if (data.result == "Basarili") {
+        navigation.navigate("Login");
       }
     } catch (error) {
       console.log(error);
@@ -65,26 +75,22 @@ const Sidebar = ({ isVisible, onClose }) => {
               <TouchableOpacity onPress={() => handlePress('Ana Sayfa')} style={styles.sidebarItem}>
                 <Text style={styles.sidebarItemText}>Ana Sayfa</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => handlePress('CategoryNews', { category_id: "6617d8a662ad98e13aec9661" })} style={styles.sidebarItem}>
-                <Text style={styles.sidebarItemText}>Son Dakika</Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => handlePress('CategoryNews', { category_id: "6617d89e62ad98e13aec965f" })} style={styles.sidebarItem}>
-                <Text style={styles.sidebarItemText}>Spor</Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => handlePress('CategoryNews', { category_id: "6617d8ad62ad98e13aec9663" })} style={styles.sidebarItem}>
-                <Text style={styles.sidebarItemText}>Magazin</Text>
-              </TouchableOpacity>
+              {category.map(item => (
+                <TouchableOpacity key={item._id} onPress={() => handlePress('CategoryNews', { category_id: item._id })} style={styles.sidebarItem}>
+                  <Text style={styles.sidebarItemText}>{item.name}</Text>
+                </TouchableOpacity>
+              ))}
               <TouchableOpacity onPress={() => handlePress('TypeNews', { type: "0" })} style={styles.sidebarItem}>
                 <Text style={styles.sidebarItemText}>Köşe Yazısı</Text>
               </TouchableOpacity>
-              {role === "yazar" || role ==="arastirmaci" && (
+              {(role === "yazar" || role === "arastirmaci") && (
                 <>
                   <TouchableOpacity onPress={() => handlePress('CreateNews')} style={styles.sidebarItem}>
                     <Text style={styles.sidebarItemText}>Haber Oluştur</Text>
                   </TouchableOpacity>
                 </>
               )}
-              {role !== "anonymous"&& (
+              {role !== "anonymous" && (
                 <>
                   <TouchableOpacity onPress={() => handleLogout()} style={styles.sidebarItem}>
                     <Text style={styles.sidebarItemText}>Çıkış</Text>

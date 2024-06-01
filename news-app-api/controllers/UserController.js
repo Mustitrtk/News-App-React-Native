@@ -12,7 +12,7 @@ exports.login = async (req, res) => {
 
         const user_id = user._id;
         const user_role = user.role_id;
-        const token = jwt.sign({user_id:user_id,user_role:user_role}, process.env.JWT_SECRET,  { expiresIn: "15m" }); //Token oluşturma.
+        const token = jwt.sign({user_id:user_id,user_role:user_role}, process.env.JWT_SECRET,  { expiresIn: "1d" }); //Token oluşturma.
         
         res.cookie('token',token, {httpOnly:true}); //tokeni res ile gönderirrr
         return res.status(200).json({result:"Basarili"})

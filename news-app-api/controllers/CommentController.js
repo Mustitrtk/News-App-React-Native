@@ -9,9 +9,9 @@ exports.get = async(req,res) =>{
     }
 }
 
-exports.getById = async(req,res) =>{
+exports.getByNewsId = async(req,res) =>{
     try{
-        const result = await CommentService.getById(req.params._id);
+        const result = await CommentService.getByNewsId(req.params._id);
         res.status(200).json({result:result});
     }catch(error){
         res.status(500).json({result:error})
