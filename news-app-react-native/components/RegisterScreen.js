@@ -12,7 +12,7 @@ const RegisterScreen = ({ navigation }) => {
 
   const handleRegister = async() => {
     try {
-      const response = await fetch('http://172.20.10.2:8080/user/register', {
+      const response = await fetch('http://10.14.12.116:8080/user/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

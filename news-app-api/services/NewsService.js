@@ -4,7 +4,9 @@ const Comment = require('../models/Comment');
 class NewsService {
     static async get() {
         try {
-            const allNews = await News.find().sort({createdAt: -1});
+            const allNews = await News.find().sort({createdAt: -1})
+            .populate({ path: 'author_id', select: ['name', 'surname'] })
+            .populate('category_id', 'name');
             return allNews;
         } catch (error) {
             console.error(error);
@@ -14,8 +16,10 @@ class NewsService {
 
     static async getById(_id) {
         try {
-            const news = await News.findById(_id).populate({ path: 'author_id', select: ['name', 'surname'] })
-            .populate('category_id', 'name');
+            const news = await News.findById(_id)
+            .populate({ path: 'author_id', select: ['name', 'surname'] })
+            .populate('category_id', 'name')
+            
             return news;
         } catch (error) {
             console.error(error);
@@ -25,7 +29,9 @@ class NewsService {
 
     static async getByType(type) {
         try {
-            const news = await News.find({type:type});
+            const news = await News.find({type:type})
+            .populate({ path: 'author_id', select: ['name', 'surname'] })
+            .populate('category_id', 'name');;
             return news;
         } catch (error) {
             console.error(error);
@@ -35,7 +41,9 @@ class NewsService {
 
     static async getByCategory(category_id) {
         try {
-            const news = await News.find({ category_id: category_id }).sort({createdAt: -1});
+            const news = await News.find({ category_id: category_id }).sort({createdAt: -1})
+            .populate({ path: 'author_id', select: ['name', 'surname'] })
+            .populate('category_id', 'name');
             return news;
         } catch (error) {
             console.error(error);

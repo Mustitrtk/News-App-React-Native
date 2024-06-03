@@ -23,17 +23,17 @@ const NewsSchema = new Schema({
     }],
     author_id:[{
         type:mongoose.Schema.Types.ObjectId,
-        referance:'User',
+        ref:'User',
         required:true
     }],
     category_id:[{
         type:mongoose.Schema.Types.ObjectId,
-        referance:'Category',
+        ref:'Category',
         required:true
     }],
     comment_id:[{
         type:mongoose.Schema.Types.ObjectId,
-        referance:'Comment',
+        ref:'Comment',
     }]
 },{timestamps:true});
 

@@ -9,6 +9,7 @@ const UserRouter = require('./routes/UserRouter');
 const RoleRouter = require('./routes/RoleRouter');
 const CategoryRouter = require('./routes/CategoryRouter');
 const NewsRouter = require('./routes/NewsRouter');
+const CommentRouter = require('./routes/CommentRouter')
 
 // DB CONNECTION
 const db = require('./config/db');
@@ -28,6 +29,7 @@ app.use('/user', UserRouter);
 app.use('/role', RoleRouter);
 app.use('/category', CategoryRouter);
 app.use('/news', NewsRouter);
+app.use('/comment',CommentRouter);
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is listening on ${process.env.PORT}`);

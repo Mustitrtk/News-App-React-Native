@@ -13,10 +13,9 @@ const HomeScreen = () => {
   const scrollX = useRef(new Animated.Value(0)).current;
   const navigation = useNavigation();
 
-  // Veri çekme işlemlerini bir fonksiyona alıyoruz
   const fetchNews = async () => {
     try {
-      const response = await fetch('http://172.20.10.2:8080/news/get', { method: 'GET' });
+      const response = await fetch('http://10.14.12.116:8080/news/get', { method: 'GET' });
       const data = await response.json();
       setNews(data.result);
     } catch (error) {
@@ -26,7 +25,7 @@ const HomeScreen = () => {
 
   const fetchCategoryNews = async () => {
     try {
-      const response = await fetch('http://172.20.10.2:8080/news/getByCategory/6617d8a662ad98e13aec9661', { method: 'GET' });
+      const response = await fetch('http://10.14.12.116:8080/news/getByCategory/6617d8a662ad98e13aec9661', { method: 'GET' });
       const data = await response.json();
       setCategoryNews(data.result);
     } catch (error) {
@@ -55,6 +54,8 @@ const HomeScreen = () => {
         <Text style={styles.title}>{item.title}</Text>
         <Text style={styles.subtitle}>{item.subtitle}</Text>
         <Text style={styles.content}>{item.content}</Text>
+        <Text style={styles.author}>Yazar: {item.author_id.map(author => `${author.name} ${author.surname}`).join(', ')}</Text>
+        <Text style={styles.category}>Tür: {item.category_id.map(category => category.name).join(', ')}</Text>
         <TouchableOpacity style={styles.detailButton} onPress={() => navigation.navigate('NewsDetail', { id: item._id })}>
           <Text style={styles.detailButtonText}>Detay</Text>
         </TouchableOpacity>
@@ -68,6 +69,8 @@ const HomeScreen = () => {
         <Text style={styles.slideTitle}>{item.title}</Text>
         <Text style={styles.slideSubtitle}>{item.subtitle}</Text>
         <Text style={styles.slideContent}>{item.content}</Text>
+        <Text style={styles.author}>Yazar: {item.author_id.map(author => `${author.name} ${author.surname}`).join(', ')}</Text>
+        <Text style={styles.category}>Tür: {item.category_id.map(category => category.name).join(', ')}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -193,6 +196,16 @@ const styles = StyleSheet.create({
   content: {
     fontSize: 14,
     lineHeight: 20,
+  },
+  author: {
+    fontSize: 14,
+    marginTop: 10,
+    color: '#888',
+  },
+  category: {
+    fontSize: 14,
+    marginTop: 10,
+    color: '#888',
   },
   detailButton: {
     marginTop: 10,

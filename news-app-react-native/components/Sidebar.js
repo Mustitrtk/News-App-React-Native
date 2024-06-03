@@ -11,7 +11,7 @@ const Sidebar = ({ isVisible, onClose }) => {
 
   const getCategories = async () => {
     try {
-      const response = await fetch('http://10.14.8.87:8080/category/get', { method: 'GET' });
+      const response = await fetch('http://10.14.12.116:8080/category/get', { method: 'GET' });
       const data = await response.json();
       setCategory(data.result);
     } catch (error) {
@@ -22,7 +22,7 @@ const Sidebar = ({ isVisible, onClose }) => {
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {
-        const response = await fetch(`http://10.14.8.87:8080/user/isLogin`, { method: 'GET' });
+        const response = await fetch(`http://10.14.12.116:8080/user/isLogin`, { method: 'GET' });
         const data = await response.json();
         setRole(data.result);
       } catch (error) {
@@ -56,7 +56,7 @@ const Sidebar = ({ isVisible, onClose }) => {
 
   const handleLogout = async () => {
     try {
-      const response = await fetch(`http://10.14.8.87:8080/user/logout`, { method: 'GET' });
+      const response = await fetch(`http://10.14.12.116:8080/user/logout`, { method: 'GET' });
       const data = await response.json();
       if (data.result == "Basarili") {
         navigation.navigate("Login");

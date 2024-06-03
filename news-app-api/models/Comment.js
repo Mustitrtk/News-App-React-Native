@@ -9,12 +9,12 @@ const CommentSchema = new Schema({
     },
     author_id:{
         type: mongoose.Schema.Types.ObjectId,
-        referance:'User',
+        ref:'User',
         required:true
     },
     news_id:{
         type: mongoose.Schema.Types.ObjectId,
-        referance:'News',
+        ref:'News',
         required:true
     }
 },{timestamps:true})

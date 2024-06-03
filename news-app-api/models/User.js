@@ -42,7 +42,7 @@ const UserSchema = new Schema({
     },
     role_id:{
         type:mongoose.Schema.Types.ObjectId,
-        referance:'Role',
+        ref:'Role',
         required:true
     }
 },{timestamps:true});
