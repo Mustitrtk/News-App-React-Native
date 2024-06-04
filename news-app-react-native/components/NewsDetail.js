@@ -24,7 +24,7 @@ const NewsDetail = ({ route }) => {
 
   const fetchNewsDetail = async () => {
     try {
-      const response = await fetch(`http://10.14.12.116:8080/news/get/${id}`, { method: 'GET' });
+      const response = await fetch(`http://10.14.13.54:8080/news/get/${id}`, { method: 'GET' });
       const data = await response.json();
       setNewsDetail(data.result);
     } catch (error) {
@@ -34,7 +34,7 @@ const NewsDetail = ({ route }) => {
 
   const fetchComments = async () => {
     try {
-      const response = await fetch(`http://10.14.12.116:8080/comment/get/${id}`, { method: 'GET' });
+      const response = await fetch(`http://10.14.13.54:8080/comment/get/${id}`, { method: 'GET' });
       const data = await response.json();
       setComments(Array.isArray(data.result) ? data.result : []);
     } catch (error) {
@@ -45,7 +45,7 @@ const NewsDetail = ({ route }) => {
 
   const checkLoginStatus = async () => {
     try {
-      const response = await fetch(`http://10.14.12.116:8080/user/isLogin`, { method: 'GET' });
+      const response = await fetch(`http://10.14.13.54:8080/user/isLogin`, { method: 'GET' });
       const data = await response.json();
       setRole(data.result);
     } catch (error) {
@@ -55,7 +55,7 @@ const NewsDetail = ({ route }) => {
 
   const getAuthUser = async()=>{
     try {
-      const response = await fetch(`http://10.14.12.116:8080/user/auth/user`, { method: 'GET' });
+      const response = await fetch(`http://10.14.13.54:8080/user/auth/user`, { method: 'GET' });
       const data = await response.json();
       setUser(data.result);
     } catch (error) {
@@ -82,7 +82,7 @@ const NewsDetail = ({ route }) => {
 
   const handleCommentSubmit = async () => {
     try {
-      const response = await fetch(`http://10.14.12.116:8080/comment/add`, {
+      const response = await fetch(`http://10.14.13.54:8080/comment/add`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -141,14 +141,16 @@ const NewsDetail = ({ route }) => {
           <Text style={styles.noComments}>Henüz Yorum Yok</Text>
         ) : (
           comments.map((comment) => (
-            <View key={comment._id} style={styles.comment}>
+            <View key={comment._id} style={styles.commentCard}>
               <Text style={styles.commentAuthor}>{comment.author_id.user_name}</Text>
               <Text style={styles.commentContent}>{comment.comment}</Text>
             </View>
           ))
         )}
       </ScrollView>
-      <Sidebar isVisible={isSidebarVisible} onClose={handleSidebarToggle} />
+      <Animated.View style={[styles.sidebarContainer, { transform: [{ translateX: slideAnim }] }]}>
+        <Sidebar isVisible={isSidebarVisible} onClose={handleSidebarToggle} />
+      </Animated.View>
     </View>
   );
 };
@@ -205,8 +207,19 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#aaa',
   },
-  comment: {
-    marginBottom: 15,
+  commentCard: {
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    padding: 15,
+    marginBottom: 10,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
   },
   commentAuthor: {
     fontSize: 14,
@@ -216,6 +229,7 @@ const styles = StyleSheet.create({
   commentContent: {
     fontSize: 14,
     color: '#555',
+    marginTop: 5,
   },
   commentInputContainer: {
     flexDirection: 'row',
@@ -229,6 +243,21 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     marginRight: 10,
+  },
+  sidebarContainer: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    width: Dimensions.get('window').width * 0.75,
+    backgroundColor: '#fff',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: -2,
+      height: 0,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 8,
   },
 });
 

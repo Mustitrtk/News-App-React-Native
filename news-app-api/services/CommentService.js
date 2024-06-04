@@ -14,7 +14,7 @@ class CommentService {
 
     static async getByNewsId(_id) {
         try {
-            const comments = await Comment.find({news_id :_id}).populate({ path: 'author_id', select: ['name', 'surname'] });
+            const comments = await Comment.find({news_id :_id}).populate({ path: 'author_id', select: ['user_name'] });
             return comments;
         } catch (error) {
             console.error(error);

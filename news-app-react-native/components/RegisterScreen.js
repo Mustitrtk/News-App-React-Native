@@ -12,7 +12,7 @@ const RegisterScreen = ({ navigation }) => {
 
   const handleRegister = async() => {
     try {
-      const response = await fetch('http://10.14.12.116:8080/user/register', {
+      const response = await fetch('http://10.14.13.54:8080/user/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -20,7 +20,8 @@ const RegisterScreen = ({ navigation }) => {
         body: JSON.stringify({
           name : name,
           surname : surname,
-          telephoneNo : telephoneNo,
+          user_name: username,
+          telephone_no : telephoneNo,
           mail : email,
           password : password,
         }),

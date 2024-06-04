@@ -27,7 +27,7 @@ const CreateNewsScreen = () => {
 
   const fetchUser = async () => {
     try {
-      const response = await fetch("http://10.14.12.116:8080/user/auth/user", { method: "GET" });
+      const response = await fetch("http://10.14.13.54:8080/user/auth/user", { method: "GET" });
       const data = await response.json();
       setAuthorId(data.result);
     } catch (error) {
@@ -37,7 +37,7 @@ const CreateNewsScreen = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await fetch('http://10.14.12.116:8080/category/get', { method: 'GET' });
+      const response = await fetch('http://10.14.13.54:8080/category/get', { method: 'GET' });
       const data = await response.json();
       setCategories(data.result);
     } catch (error) {
@@ -51,7 +51,7 @@ const CreateNewsScreen = () => {
 
   const handleNewsSubmit = async () => {
     try {
-      const response = await fetch('http://10.14.12.116:8080/news/add', {
+      const response = await fetch('http://10.14.13.54:8080/news/add', {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',

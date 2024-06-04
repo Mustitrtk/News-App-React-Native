@@ -15,7 +15,7 @@ const HomeScreen = () => {
 
   const fetchNews = async () => {
     try {
-      const response = await fetch('http://10.14.12.116:8080/news/get', { method: 'GET' });
+      const response = await fetch('http://10.14.13.54:8080/news/get', { method: 'GET' });
       const data = await response.json();
       setNews(data.result);
     } catch (error) {
@@ -25,7 +25,7 @@ const HomeScreen = () => {
 
   const fetchCategoryNews = async () => {
     try {
-      const response = await fetch('http://10.14.12.116:8080/news/getByCategory/6617d8a662ad98e13aec9661', { method: 'GET' });
+      const response = await fetch('http://10.14.13.54:8080/news/getByCategory/6617d8a662ad98e13aec9661', { method: 'GET' });
       const data = await response.json();
       setCategoryNews(data.result);
     } catch (error) {
