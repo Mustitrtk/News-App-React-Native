@@ -12,3 +12,7 @@ News app with react native and nodejs.
 2. Cd news-app-react-native
 3. npm install
 4. npx expo start --tunnel
+
+
+#### My Project Explanation Video
+https://www.youtube.com/watch?v=r1eMmpda2p0
